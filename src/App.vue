@@ -19,7 +19,7 @@ const products = ref([
     <RouterLink to="/create">Go to Create</RouterLink>
 </nav>
 <RouterView />
-<GroceriesTable :list="products"/>
+
 
 </template>
 
