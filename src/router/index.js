@@ -6,7 +6,7 @@ import Edit from '../domains/groceries/pages/Edit.vue'
 const routes = [
   { path: '/', component: Overview },
   { path: '/create', component: Create },
-  { path: '/edit', component: Edit }
+  { path: '/edit/:id', name: 'edit', component: Edit , props: true}
 ]
 
 

@@ -29,7 +29,9 @@ body {
   min-width: 320px;
   min-height: 100vh;
 }
-
+nav a{
+  margin: 10px;
+}
 table td {
   padding: 10px;
   border: 1px solid black;
