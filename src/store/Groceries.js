@@ -1,4 +1,5 @@
 import { ref, computed } from 'vue'
+import { router } from '../router/index.js'
 
 // STATE
 
@@ -15,32 +16,35 @@ const groceries = ref([
 export const getAllGroceries = computed(() => groceries.value);
 
 export const getGroceryById = (id) => computed(
-    () => 
+    () =>
         groceries.value.find(grocery => grocery.id == id)
-        
-    );
+
+);
 
 
 //ACTIONS
 
 export const editGrocery = (grocery) => {
- let id = grocery.value.id 
- let groceryToEdit = groceries.value.find(item => item.id == id) 
- groceryToEdit.name = grocery.value.name
- groceryToEdit.price = grocery.value.price
- groceryToEdit.quantity = grocery.value.quantity
- console.log(groceryToEdit)
+    let groceryToEdit = groceries.value.find(item => item.id == grocery.id)
+
+    groceryToEdit.name = grocery.name
+    groceryToEdit.price = grocery.price
+    groceryToEdit.quantity = grocery.quantity
+
+    router.push('/')
+
 }
 
 export const addGrocery = (grocery) => {
-    grocery.value.id = groceries.value.length + 1
-    console.log(grocery.value)
-    groceries.value.push(grocery.value)
+    grocery.id = groceries.value.length + 1
+    console.log(grocery)
+    groceries.value.push(grocery)
+    router.push('/')
 }
 
 export const removeGrocery = (id) => {
     let valueToRemove = groceries.value.find(grocery => grocery.id == id)
     let indexToRemove = groceries.value.indexOf(valueToRemove)
     groceries.value.splice(indexToRemove, 1)
-    
+
 }

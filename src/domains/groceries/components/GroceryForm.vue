@@ -6,15 +6,14 @@ import { ref } from 'vue';
 
 const props = defineProps(['grocery']);
 
-const grocery = props.grocery;
 
-const groceryCopy = ref({...grocery});
+const groceryCopy = ref({...props.grocery});
 
 // EMITS
 
 const emit = defineEmits(['customSubmit'])
 
-const submitForm = () => emit('customSubmit', groceryCopy)
+const submitForm = () => emit('customSubmit', groceryCopy.value)
 
 </script>
 

@@ -1,16 +1,14 @@
 <script setup >
 
-import { ref, computed } from 'vue'
 
 import GroceryForm from '../components/GroceryForm.vue'
 
 import { getGroceryById, editGrocery } from '../../../store/Groceries'
+import { useRoute } from 'vue-router';
 
-const props = defineProps(['id']);
 
-const id = props.id 
 
-const groceryToEdit = getGroceryById(id);
+const groceryToEdit = getGroceryById(useRoute().params.id);
 
 
 </script>

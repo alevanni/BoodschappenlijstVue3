@@ -7,23 +7,8 @@ import { removeGrocery } from '../../../store/Groceries'
 
 const props = defineProps(['list'])
 
-const list = props.list
+const total = computed(()=> props.list.reduce( (total, grocery) => total += grocery.price * grocery.quantity, 0))
 
-const subtotals = computed(()=>{
-    const totalPrices = [];
-    list.forEach( (item) => {
-    totalPrices.push( (item.quantity * item.price) )
-    })
-    
-    return totalPrices;
-})
-
-const total = computed(()=>{
-    let tot = 0
-    tot = subtotals.value.reduce( (accumulator, current) => accumulator + current, tot)
-    
-    return tot;
-})
 </script>
 
 <template>
@@ -36,11 +21,11 @@ const total = computed(()=>{
          <td>Subtotal</td>
          
        </thead>
-       <tr v-for="(item, index) in list" :key="item.id">
+       <tr v-for="(item, index) in props.list" :key="item.id">
         <td>{{ item.name }}</td>
         <td>{{ item.price.toFixed(2) }} &#8364;</td>
         <td> <input type="number" min="0" max="20" v-model="list[index].quantity"></td>
-        <td>{{ subtotals[index].toFixed(2) }}</td>
+        <td>{{ (item.quantity * item.price).toFixed(2) }}</td>
         <td> <RouterLink :to="{name: 'edit', params: { id: item.id }}">Edit</RouterLink></td>
         <td><button @click="removeGrocery(item.id)">Delete</button></td>
        </tr>
